@@ -19,7 +19,7 @@
 Tienes dos maneras de hacerlo, elige la que prefieras:
 
 * **Opción A (La más fácil):**
-    > Simplemente descarga el archivo `debian_mantenimiento.sh` de este repositorio. Ve al archivo, haz clic en el botón que dice **"Raw"** y luego, en la nueva página, haz clic derecho y selecciona **"Guardar como..."**. Guárdalo en una carpeta que ubiques fácilmente, como **Descargas**.
+    > Simplemente descarga el archivo `debian_mantenimiento.sh` de este repositorio. Ve al archivo, haz clic en el botón de **"Descargar"** y luego, guárdalo en una carpeta que ubiques fácilmente, como **Descargas**.
 
 * **Opción B (Para usuarios de Git):**
     > Si prefieres usar la terminal, clona el repositorio completo:
