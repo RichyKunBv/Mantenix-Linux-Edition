@@ -46,10 +46,15 @@ Tienes dos maneras de hacerlo, elige la que prefieras:
     ```
 ¡Listo! El menú del asistente aparecerá y podrás empezar a darle mantenimiento a tu PC.
 
+![instruccion](https://github.com/user-attachments/assets/840f5e0a-86e8-4801-b837-fc0eeda52318)
+
 ---
 
 ## 📋 Funcionalidades del Menú
 > Cada opción está disenada para ser clara y directa.
+
+![Menu](https://github.com/user-attachments/assets/fc69b9e2-9dd7-430d-839b-c2612354b459)
+
 
 ### `Opción 1: Actualización Estándar`
 > **¿Qué hace?** Es la actualización del día a día. Busca y aplica las nuevas versiones de tus programas principales (manejados por APT) y también de las aplicaciones que tengas de Flatpak y Snap. Mantiene tu software seguro y con las últimas funciones.
@@ -65,6 +70,12 @@ Tienes dos maneras de hacerlo, elige la que prefieras:
 
 ### `Opción X: Salir`
 > **¿Qué hace?** Cierra el programa de forma segura.
+
+### `Opción Y: Actualizar Script`
+> **¿Qué hace?** Verifica la ultima version disponible en Git, si es que hay una nueva la descarga.
+
+![actualizacion](https://github.com/user-attachments/assets/7d00926d-3cb2-421e-b67b-883df5455856)
+
 
 ---
 ### ⚠️ Nota del Desarrollador
