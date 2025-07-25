@@ -3,7 +3,7 @@
 # Creado RichyKunBv
 
 #VERSION
-VERSION_LOCAL="2.1"
+VERSION_LOCAL="2.1.1"
 
 # --- Colores ---
 VERDE='\033[0;32m'
@@ -71,7 +71,7 @@ function actualizar_script() {
     echo -e "\n${AMA}› Verificando actualizaciones para el script...${DEFAULT}"
     
     local url_version="https://raw.githubusercontent.com/RichyKunBv/Debian_Maintenance/main/version.txt"
-    local url_script="https://raw.githubusercontent.com/RichyKunBv/Debian_Maintenance/main/debian_mantenimiento.sh"
+    local url_script="https://raw.githubusercontent.com/RichyKunBv/Debian_Maintenance/main/MantenixL.sh"
     
     local download_tool=""
     if command -v curl &> /dev/null; then
