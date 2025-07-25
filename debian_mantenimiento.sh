@@ -75,7 +75,7 @@ function actualizar_script() {
     
     # --- LISTAS DE POSIBLES NOMBRES ---
     # Si cambias el nombre del repo o del script, añádelo aquí en la próxima versión.
-    local repos_posibles=("Debian_Maintenance" "Mantenix")
+    local repos_posibles=("Mantenix" "Debian_Maintenance")
     local scripts_posibles=("MantenixL.sh" "debian_mantenimiento.sh")
 
     local url_version_encontrada=""
@@ -160,7 +160,6 @@ while true; do
     echo -e "  ${MAGENTA}A. MODO DIOS${DEFAULT}"
     echo -e "  ${AMA}Y. Actualizar Script${DEFAULT}"
     echo -e "  ${ROJO}X. Salir${DEFAULT}"
-    echo -e "  ñ. Sorpresa"
     read -p "  Selecciona una opción: " opcion
 
     case $opcion in
