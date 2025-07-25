@@ -1,82 +1,156 @@
-# 🚀 Asistente de Mantenimiento para Linux
-> Un script simple pero poderoso para mantener tu sistema operativo **Debian, Ubuntu y derivados** actualizado y limpio con solo unos pocos clics. Olvídate de escribir comandos largos y complicados en la terminal.
+# 🚀 Mantenix: El Asistente de Mantenimiento Definitivo para Linux
+
+> Creado por **RichyKunBv** | Versión actual del script: **3.0**
+
+Un script de terminal potente y amigable diseñado para simplificar el mantenimiento de tu sistema Linux. Con un menú interactivo, automatiza las tareas de actualización, limpieza y optimización para las familias de distribuciones más populares: **Debian**, **Fedora** y **Arch**.
+
+
 
 ---
 
 ## ✨ Características Principales
 
--   ✅ **Fácil de usar:** Un menú interactivo te guía en todo momento.
--   🔄 **Completo:** Actualiza los programas instalados a través de `APT`, `Flatpak` y `Snap`.
--   🧹 **Eficiente:** Limpia tu sistema de archivos basura para liberar espacio.
--   🛡️ **Seguro:** Realiza las tareas de mantenimiento más importantes de forma segura.
+-   🐧 **Soporte Multi-Distro:** Detecta automáticamente si usas una distribución basada en Debian (Ubuntu, Mint), Fedora (RHEL, CentOS) o Arch (Manjaro, EndeavourOS) y aplica los comandos correctos.
+-   🔄 **Actualización Completa:** Actualiza los repositorios nativos (`apt`, `dnf`, `pacman`), paquetes de **Flatpak** y **Snap**, e incluso paquetes de **AUR** si tienes `yay` o `paru` instalado.
+-   🧹 **Limpieza Profunda:** Elimina paquetes huérfanos, limpia la caché de paquetes y reduce el tamaño de los logs del sistema (`journalctl`) para liberar espacio valioso.
+-   🛠️ **Optimización del Sistema:** Verifica la integridad de los paquetes instalados y optimiza las bases de datos del gestor de paquetes para un rendimiento más rápido y fiable.
+-   🤖 **MODO DIOS:** Una opción para ejecutar una secuencia completa de mantenimiento (actualización profunda, limpieza y optimización) con un solo comando. ¡Ideal para un mantenimiento completo!
+-   ⬆️ **Auto-Actualización:** El script puede buscar y descargar su versión más reciente directamente desde GitHub para que siempre tengas las últimas mejoras.
 
 ---
 
-## ⚙️ ¿Cómo empezar? (Instalación Universal)
-> No importa si eres un experto o un principiante, estos 3 pasos funcionan para todos.
+## ⚙️ Instalación y Ejecución (El Método Universal)
+
+Olvídate de clonar repositorios. Abre una terminal y ejecuta este comando para descargar la última versión y darle permisos.
+
+**Instalacion Universal**
+
+```bash
+curl -L -o MantenixL.sh [https://raw.githubusercontent.com/RichyKunBv/Mantenix/main/MantenixL.sh]
+```
+
+
+<details>
+<summary>Haz clic aquí para ver las instrucciones para Debian</summary>
 
 ### 1. Obtener el script
 Tienes dos maneras de hacerlo, elige la que prefieras:
 
 * **Opción A (La más fácil):**
-    > Simplemente descarga el archivo `debian_mantenimiento.sh` de este repositorio. Ve al archivo, haz clic en el botón de **"Descargar"** y luego, guárdalo en una carpeta que ubiques fácilmente, como **Descargas**.
+    > Descarga el archivo `MantenixL.sh` desde el repositorio de GitHub. Guárdalo en una carpeta que ubiques fácilmente, como **Descargas**.
 
 * **Opción B (Para usuarios de Git):**
     > Si prefieres usar la terminal, clona el repositorio completo:
     > ```bash
-    > git clone [https://github.com/RichyKunBv/Debian_Maintenance.git](https://github.com/RichyKunBv/Debian_Maintenance.git)
+    > git clone [https://github.com/RichyKunBv/Mantenix.git](https://github.com/RichyKunBv/Mantenix.git)
     > ```
 
 ### 2. Abrir una terminal en el lugar correcto
-> Este es el paso más importante para que todo funcione sin errores. Ve a la carpeta donde guardaste o descargaste el script (por ejemplo, la carpeta `Descargas`). Una vez dentro, haz **clic derecho** en un espacio vacío y busca una opción que diga **"Abrir en una terminal"** o "Abrir terminal aqui".
+> Este paso es clave. Ve a la carpeta donde guardaste el script (p. ej., **Descargas** o la nueva carpeta `Mantenix` si usaste git). Una vez dentro, haz **clic derecho** en un espacio vacío y busca la opción **"Abrir en una terminal"**.
 >
-> *(Si usaste la Opción B de Git, simplemente entra a la carpeta nueva con `cd Debian_Maintenance`)*
+> *(Como sé que te gusta XFCE, en su gestor de archivos Thunar la opción aparece directamente al hacer clic derecho. ¡Muy práctico!)*
 
 ### 3. Dar permisos y ejecutar
-> Ahora que la terminal está abierta en la carpeta correcta, solo necesitas copiar y pegar estos dos comandos, uno por uno:
+> Con la terminal abierta en la carpeta correcta, solo necesitas usar estos dos comandos:
 
-* **Para darle al archivo permiso de ejecutarse:**
+* **Para darle permiso de ejecución:**
     ```bash
-    chmod +x debian_mantenimiento.sh
+    chmod +x MantenixL.sh
     ```
 
-* **Para ejecutar el asistente (necesita `sudo`):**
+* **Para ejecutar el asistente (siempre con `sudo`):**
     ```bash
-    sudo ./debian_mantenimiento.sh
+    sudo ./MantenixL.sh
     ```
-¡Listo! El menú del asistente aparecerá y podrás empezar a darle mantenimiento a tu PC.
+¡Listo! El menú del asistente aparecerá y podrás empezar a darle mantenimiento a tu sistema Debian/Ubuntu.
 
-![instruccion](https://github.com/user-attachments/assets/840f5e0a-86e8-4801-b837-fc0eeda52318)
+</details>
+
+<details>
+<summary>Haz clic aquí para ver las instrucciones para Fedora</summary>
+
+### 1. Obtener el script
+Tienes dos maneras de hacerlo, elige la que prefieras:
+
+* **Opción A (La más fácil):**
+    > Descarga el archivo `MantenixL.sh` desde el repositorio de GitHub. Guárdalo en una carpeta que ubiques fácilmente, como **Descargas**.
+
+* **Opción B (Para usuarios de Git):**
+    > Si prefieres usar la terminal, puedes clonar el repositorio completo (puede que necesites instalar git primero con `sudo dnf install git`):
+    > ```bash
+    > git clone [https://github.com/RichyKunBv/Mantenix.git](https://github.com/RichyKunBv/Mantenix.git)
+    > ```
+
+### 2. Abrir una terminal en el lugar correcto
+> Este paso es clave. Ve a la carpeta donde guardaste el script (p. ej., **Descargas** o la nueva carpeta `Mantenix`). Una vez dentro, haz **clic derecho** en un espacio vacío y busca la opción **"Abrir en una terminal"**.
+>
+> *(En la versión por defecto de Fedora con GNOME, esta opción suele estar disponible en el gestor de archivos. Si por alguna razón no la encuentras, siempre puedes abrir una terminal y navegar manualmente con el comando `cd ~/Descargas`.)*
+
+### 3. Dar permisos y ejecutar
+> Con la terminal abierta en la carpeta correcta, solo necesitas usar estos dos comandos:
+
+* **Para darle permiso de ejecución:**
+    ```bash
+    chmod +x MantenixL.sh
+    ```
+
+* **Para ejecutar el asistente (siempre con `sudo`):**
+    ```bash
+    sudo ./MantenixL.sh
+    ```
+¡Listo! El menú del asistente aparecerá, detectará tu sistema Fedora y podrás empezar a darle mantenimiento.
+
+</details>
+
+
+
+<details>
+<summary>Haz clic aquí para ver las instrucciones para Arch</summary>
+
+### 1. Obtener el script
+Tienes dos maneras de hacerlo, elige la que prefieras:
+
+* **Opción A (La más fácil):**
+    > Descarga el archivo `MantenixL.sh` desde el repositorio de GitHub y guárdalo en una carpeta que ubiques fácilmente, como **Descargas**.
+
+* **Opción B (Recomendada para usuarios de Arch):**
+    > Es muy probable que ya tengas `git` instalado. Clona el repositorio directamente desde la terminal:
+    > ```bash
+    > git clone [https://github.com/RichyKunBv/Mantenix.git](https://github.com/RichyKunBv/Mantenix.git)
+    > ```
+
+### 2. Abrir una terminal en el lugar correcto
+> Los usuarios de Arch suelen preferir la terminal. Simplemente navega a la carpeta donde está el script.
+> ```bash
+> # Navega a la carpeta de descargas
+> cd ~/Descargas
+> 
+> # O a la carpeta del repo si lo clonaste
+> cd Mantenix
+> ```
+> *(Por supuesto, el método de hacer **clic derecho -> "Abrir en terminal"** también funciona en la mayoría de gestores de archivos como Dolphin, Thunar o Files, dependiendo de tu entorno de escritorio.)*
+
+### 3. Dar permisos y ejecutar
+> Ya en la carpeta correcta, solo te quedan estos dos comandos:
+
+* **Para darle permiso de ejecución:**
+    ```bash
+    chmod +x MantenixL.sh
+    ```
+
+* **Para ejecutar el asistente (siempre con `sudo`):**
+    ```bash
+    sudo ./MantenixL.sh
+    ```
+¡Listo! El menú del asistente aparecerá, reconocerá tu sistema Arch y podrás empezar a darle mantenimiento, **incluyendo los paquetes del AUR si tienes `yay` o `paru`**.
+
+</details>
+
+</details>
+
 
 ---
 
-## 📋 Funcionalidades del Menú
-> Cada opción está disenada para ser clara y directa.
-
-![Menu](https://github.com/user-attachments/assets/fc69b9e2-9dd7-430d-839b-c2612354b459)
-
-
-### `Opción 1: Actualización Estándar`
-> **¿Qué hace?** Es la actualización del día a día. Busca y aplica las nuevas versiones de tus programas principales (manejados por APT) y también de las aplicaciones que tengas de Flatpak y Snap. Mantiene tu software seguro y con las últimas funciones.
-
-### `Opción 2: Limpiar Sistema`
-> **¿Qué hace?** Libera espacio en tu disco duro. Elimina paquetes que ya no se necesitan y borra los archivos de instalación temporales que se acumulan con el tiempo. Es como pasar la aspiradora a tu sistema.
-
-### `Opción 3: Actualización Profunda del Sistema`
-> **¿Qué hace?** Esta es una actualización más seria. No solo actualiza los programas, sino que también puede manejar cambios importantes en el nucleo de tu sistema operativo. Usala de vez en cuando, por ejemplo, una vez al mes, para asegurarte de que todo el sistema este al dia.
-
-### `Opción A: MODO DIOS`
-> **¿Qué hace?** Es la opción "hacer todo con un solo clic". Realiza la **Actualización Profunda (3)**, luego la **Actualización Estándar (1)** y finalmente la **Limpieza del Sistema (2)**, todo en una sola secuencia automática. Es la mejor opción para hacer un mantenimiento completo y dejar tu computadora como nueva.
-
-### `Opción X: Salir`
-> **¿Qué hace?** Cierra el programa de forma segura.
-
-### `Opción Y: Actualizar Script`
-> **¿Qué hace?** Verifica la ultima version disponible en Git, si es que hay una nueva la descarga.
-
-![actualizacion](https://github.com/user-attachments/assets/7d00926d-3cb2-421e-b67b-883df5455856)
-
-
----
-### ⚠️ Nota del Desarrollador
-> NUNCA DE LOS NUNCA PONGAN ñ o Ñ por favor no lo hagan
+### --- NOTAS --- 
+* Si tienes de la version Legacy (debian_mantenimiento.sh) tienes que actualizar 2 veces (Usando la funcion "Y") para tener la nueva version (MantenixL)
+* En los primeros dias de Agosto voy a cambiar el nombre del repositorio asi que si te gusta te recomiendo guardarlo o seguirme para que no lo pierdas <3
