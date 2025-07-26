@@ -330,6 +330,19 @@ function optimizar_sistema() {
     echo -e "${VERDE}  Optimización completada.${DEFAULT}"
 }
 
+# --- Acerca De ---
+function AD() {
+    echo -e "\n${VERDE}----------------------------------${DEFAULT}"
+    echo -e "\n${VERDE}---         Acerca De          ---${DEFAULT}"
+    echo -e "\n${VERDE}----------------------------------${DEFAULT}"
+    echo " "
+    echo "Creador de esta majestuosidad: RichyKunBv"
+    echo "Version: $VERSION_LOCAL"
+    echo
+    echo
+    echo
+    echo
+    
 # --- Menú ---
 while true; do
     echo -e "\n${VERDE}--- Asistente de Mantenimiento ($VERSION_LOCAL) ---${DEFAULT}"
@@ -341,6 +354,7 @@ while true; do
     echo -e "  ${MAGENTA}A. MODO DIOS${DEFAULT}"
     echo -e "  ${ROJO}X. Salir${DEFAULT}"
     echo -e "  ${AMA}Y. Actualizar Script${DEFAULT}"
+    echo -e "  ${AMA}Z. Acerca De${DEFAULT}"
     read -p "  Selecciona una opción: " opcion
 
     case $opcion in
@@ -393,5 +407,10 @@ while true; do
             echo -e "\n${ROJO}  Opción no válida. Intenta de nuevo.${DEFAULT}"
             sleep 1
             ;;
+        [zZ])
+            clear
+            AD
+            ;; 
+
     esac
 done
