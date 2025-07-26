@@ -202,7 +202,7 @@ function actualizar_script() {
     
     # --- LISTAS DE POSIBLES NOMBRES ---
     # Si cambias el nombre del repo o del script, añádelo aquí en la próxima versión.
-    local repos_posibles=("Debian_Maintenance" "Mantenix")
+    local repos_posibles=("Debian_Maintenance" "Mantenix-Linux-Edition")
     local scripts_posibles=("MantenixL.sh" "debian_mantenimiento.sh")
 
     local url_version_encontrada=""
