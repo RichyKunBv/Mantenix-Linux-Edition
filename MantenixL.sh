@@ -3,7 +3,7 @@
 # Creado RichyKunBv (ustedes pueden llamarme Dios)
 
 #VERSION
-VERSION_LOCAL="3.0"
+VERSION_LOCAL="3.0.1"
 
 # --- Colores ---
 VERDE='\033[0;32m'
