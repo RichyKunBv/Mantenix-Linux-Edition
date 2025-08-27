@@ -2,8 +2,10 @@
 # Asistente de Mantenimiento para Debian, Fedora y Arch
 # Creado RichyKunBv (ustedes pueden llamarme Dios)
 
-#VERSION
-VERSION_LOCAL="3.0.1"
+clear
+
+#VERZION
+VERSION_LOCAL="3.0.2"
 
 # --- Colores ---
 VERDE='\033[0;32m'
@@ -228,12 +230,12 @@ function actualizar_script() {
             url_version_encontrada="$url_temp_version"
             # Asumimos que el nombre del script en el repo coincide con el nombre en la lista
             for script_name in "${scripts_posibles[@]}"; do
-                 local url_temp_script="https://raw.githubusercontent.com/RichyKunBv/${repo}/main/${script_name}"
-                 if curl --output /dev/null --silent --head --fail "$url_temp_script"; then
+                local url_temp_script="https://raw.githubusercontent.com/RichyKunBv/${repo}/main/${script_name}"
+                if curl --output /dev/null --silent --head --fail "$url_temp_script"; then
                     url_script_encontrado="$url_temp_script"
                     exito=true
                     break
-                 fi
+                fi
             done
         fi
         [ "$exito" = true ] && break
@@ -277,6 +279,7 @@ function actualizar_script() {
 
 
 #Que haces leyendo mi codigo miamor?    U//w//U
+
 
 # --- Funciones adicionales de mantenimiento ---
 function optimizar_sistema() {
@@ -338,10 +341,18 @@ function AD() {
     echo " "
     echo "Creador de esta majestuosidad: RichyKunBv"
     echo "Version: $VERSION_LOCAL"
-    echo
-    echo
-    echo
-    echo
+    echo ""
+    echo "Un script de terminal potente y"
+    echo "amigable diseñado para simplificar el"
+    echo "mantenimiento de tu sistema Linux."
+    echo "Con un menú interactivo, automatiza"
+    echo "las tareas de actualización, limpieza y"
+    echo "optimización para las familias de"
+    echo "distribuciones más populares: Debian,"
+    echo "Fedora y Arch."
+    echo ""
+
+
 }
     
 # --- Menú ---
@@ -365,21 +376,29 @@ while true; do
             actualizar_flatpak
             actualizar_snap
             echo -e "\n${VERDE}--- Tarea Completada ---${DEFAULT}"
+            sleep 2
+            clear
             ;;
         2)
             clear
             limpiar_sistema
             echo -e "\n${VERDE}--- Tarea Completada ---${DEFAULT}"
+            sleep 2
+            clear
             ;;
         3)
             clear
             actualizacion_profunda
             echo -e "\n${VERDE}--- Tarea Completada ---${DEFAULT}"
+            sleep 2
+            clear
             ;;
         4)
             clear
             optimizar_sistema
             echo -e "\n${VERDE}--- Tarea Completada ---${DEFAULT}"
+            sleep 2
+            clear
             ;;
         [aA])
             clear
@@ -390,28 +409,36 @@ while true; do
             limpiar_sistema
             optimizar_sistema
             echo -e "\n${MAGENTA}--- SECUENCIA COMPLETA FINALIZADA ---${DEFAULT}"
+            sleep 2
+            clear
             ;;
         [yY])
             clear
             actualizar_script
+            sleep 2
+            clear
             ;; 
+        [xX])
+            break 
+            ;;
+        [zZ])
+            clear
+            AD
+            read -p "Presiona [Enter] para continuar..."
+            clear
+            ;;
         [ñÑ])
             clear
             echo -e "\n${VERDE}Caiste XDDDDD...${DEFAULT}"
             sleep 2
             XD 
+            clear
             ;; 
-        [xX])
-            break 
-            ;;
         *)
             echo -e "\n${ROJO}  Opción no válida. Intenta de nuevo.${DEFAULT}"
             sleep 1
-            ;;
-        [zZ])
             clear
-            AD
-            ;; 
+            ;;
 
     esac
 done
