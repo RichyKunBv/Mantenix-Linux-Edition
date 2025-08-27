@@ -153,4 +153,3 @@ Tienes dos maneras de hacerlo, elige la que prefieras:
 
 ### --- NOTAS --- 
 * Si tienes de la version Legacy (debian_mantenimiento.sh) tienes que actualizar 2 veces (Usando la funcion "Y") para tener la nueva version (MantenixL)
-* En los primeros dias de Agosto voy a cambiar el nombre del repositorio asi que si te gusta te recomiendo guardarlo o seguirme para que no lo pierdas <3
