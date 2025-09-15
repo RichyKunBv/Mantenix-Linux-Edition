@@ -13,10 +13,11 @@ Un script de terminal potente y amigable diseñado para simplificar el mantenimi
 -   🐧 **Soporte Multi-Distro¹:** Detecta automáticamente si usas una distribución basada en Debian (Ubuntu, Mint), Fedora (RHEL, CentOS) o Arch (Manjaro, EndeavourOS) y aplica los comandos correctos.
 -   🔄 **Actualización Completa²:** Actualiza los repositorios nativos (`apt`, `dnf`, `pacman`), paquetes de **Flatpak** y **Snap**, e incluso paquetes de **AUR** si tienes `yay` o `paru` instalado.
 -   🧹 **Limpieza Profunda³:** Elimina paquetes huérfanos, limpia la caché de paquetes y reduce el tamaño de los logs del sistema (`journalctl`) para liberar espacio valioso.
--   🛠️ **Optimización del Sistema:** Verifica la integridad de los paquetes instalados y optimiza las bases de datos del gestor de paquetes para un rendimiento más rápido y fiable.
--   🤖 **MODO DIOS:** Una opción para ejecutar una secuencia completa de mantenimiento (actualización profunda, limpieza y optimización) con un solo comando. ¡Ideal para un mantenimiento completo!
--   ⬆️ **Auto-Actualización⁴:** El script puede buscar y descargar su versión más reciente directamente desde GitHub para que siempre tengas las últimas mejoras.
-
+-   🛠️ **Optimización del Sistema⁴:** Verifica la integridad de los paquetes instalados y optimiza las bases de datos del gestor de paquetes para un rendimiento más rápido y fiable.
+-   🤖 **MODO DIOS⁵:** Una opción para ejecutar una secuencia completa de mantenimiento (actualización profunda, limpieza y optimización) con un solo comando. ¡Ideal para un mantenimiento completo!
+-   ⬆️ **Auto-Actualización⁶:** El script puede buscar y descargar su versión más reciente directamente desde GitHub para que siempre tengas las últimas mejoras.
+-   🔐 **Ejecución Segura⁷:** Requiere explícitamente privilegios de superusuario para funcionar, asegurando que solo tú autorices los cambios en tu sistema.
+  
 ---
 
 ## ⚙️ Instalación y Ejecución (El Método Universal)
@@ -151,8 +152,24 @@ Tienes dos maneras de hacerlo, elige la que prefieras:
 
 ---
 
-### --- NOTAS --- 
-* ¹ Solo fue probado que funciona en las distros base como Debian, Fedora y Arch
-* ² No aseguro que la actualizacion del sistema sea estable, eso depende de la distro
-* ³ No lo recomiendo usar en distros inestables ya que no se puede hacer downgrade por que se eliminan datos viejos
-* ⁴ Necesita conexion a internet ya que se conecta directo a este repositorio en linea
+
+<details>
+<summary>NOTAS</summary>
+
+
+1.  **Compatibilidad de Distribuciones:** La compatibilidad está garantizada para las versiones base estables de Debian, Fedora y Arch. Aunque se espera que funcione en la mayoría de sus derivados (como Ubuntu, Mint, Manjaro), podrían existir diferencias menores no contempladas en paquetes o configuraciones específicas.
+
+2.  **Estabilidad de las Actualizaciones:** Mantenix automatiza la ejecución de los gestores de paquetes nativos (`apt`, `dnf`, `pacman`). La estabilidad, éxito o posibles conflictos de las actualizaciones dependen enteramente de los repositorios que el usuario tenga configurados y del estado general de su sistema. Se recomienda tener copias de seguridad de los datos importantes.
+
+3.  **Uso de la Limpieza Profunda:** La función de limpieza elimina cachés de paquetes y, en algunos sistemas, kernels antiguos para liberar espacio. Esta acción es, en general, irreversible y podría dificultar el "downgrade" (volver a una versión anterior) de un paquete específico. Úsese con precaución en sistemas de producción críticos.
+
+4.  **Alcance de la Optimización:** La "optimización" se refiere a tareas de mantenimiento del gestor de paquetes, como la verificación de paquetes corruptos y la limpieza de metadatos. Esta función no modifica configuraciones del kernel, del sistema de arranque ni realiza acciones de "overclocking".
+
+5.  **MODO DIOS:** Esta función ejecuta de forma secuencial y sin pedir confirmación adicional las tareas de "Actualización Profunda", "Actualización Estándar", "Limpieza Profunda" y "Optimización". Es una acción potente y se recomienda ejecutarla con pleno conocimiento de las tareas que involucra.
+
+6.  **Requisitos de la Auto-Actualización:** La función de auto-actualización requiere una conexión a internet activa para contactar con los servidores de GitHub.com, así como tener instalada en el sistema alguna de las herramientas de descarga `curl` o `wget`.
+
+7.  **Privilegios de Superusuario:** Todas las operaciones de mantenimiento que realiza el script (instalar, eliminar o modificar paquetes y archivos del sistema) requieren privilegios de administrador. Por seguridad, el script verificará que se ejecute con `sudo` y se detendrá si no los tiene.
+
+</details>
+
