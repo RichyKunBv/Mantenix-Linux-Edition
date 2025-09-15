@@ -10,12 +10,12 @@ Un script de terminal potente y amigable diseñado para simplificar el mantenimi
 
 ## ✨ Características Principales
 
--   🐧 **Soporte Multi-Distro:** Detecta automáticamente si usas una distribución basada en Debian (Ubuntu, Mint), Fedora (RHEL, CentOS) o Arch (Manjaro, EndeavourOS) y aplica los comandos correctos.
--   🔄 **Actualización Completa:** Actualiza los repositorios nativos (`apt`, `dnf`, `pacman`), paquetes de **Flatpak** y **Snap**, e incluso paquetes de **AUR** si tienes `yay` o `paru` instalado.
--   🧹 **Limpieza Profunda:** Elimina paquetes huérfanos, limpia la caché de paquetes y reduce el tamaño de los logs del sistema (`journalctl`) para liberar espacio valioso.
+-   🐧 **Soporte Multi-Distro¹:** Detecta automáticamente si usas una distribución basada en Debian (Ubuntu, Mint), Fedora (RHEL, CentOS) o Arch (Manjaro, EndeavourOS) y aplica los comandos correctos.
+-   🔄 **Actualización Completa²:** Actualiza los repositorios nativos (`apt`, `dnf`, `pacman`), paquetes de **Flatpak** y **Snap**, e incluso paquetes de **AUR** si tienes `yay` o `paru` instalado.
+-   🧹 **Limpieza Profunda³:** Elimina paquetes huérfanos, limpia la caché de paquetes y reduce el tamaño de los logs del sistema (`journalctl`) para liberar espacio valioso.
 -   🛠️ **Optimización del Sistema:** Verifica la integridad de los paquetes instalados y optimiza las bases de datos del gestor de paquetes para un rendimiento más rápido y fiable.
 -   🤖 **MODO DIOS:** Una opción para ejecutar una secuencia completa de mantenimiento (actualización profunda, limpieza y optimización) con un solo comando. ¡Ideal para un mantenimiento completo!
--   ⬆️ **Auto-Actualización:** El script puede buscar y descargar su versión más reciente directamente desde GitHub para que siempre tengas las últimas mejoras.
+-   ⬆️ **Auto-Actualización⁴:** El script puede buscar y descargar su versión más reciente directamente desde GitHub para que siempre tengas las últimas mejoras.
 
 ---
 
@@ -152,4 +152,7 @@ Tienes dos maneras de hacerlo, elige la que prefieras:
 ---
 
 ### --- NOTAS --- 
-* Si tienes de la version Legacy (debian_mantenimiento.sh) tienes que actualizar 2 veces (Usando la funcion "Y") para tener la nueva version (MantenixL)
+* ¹ Solo fue probado que funciona en las distros base como Debian, Fedora y Arch
+* ² No aseguro que la actualizacion del sistema sea estable, eso depende de la distro
+* ³ No lo recomiendo usar en distros inestables ya que no se puede hacer downgrade por que se eliminan datos viejos
+* ⁴ Necesita conexion a internet ya que se conecta directo a este repositorio en linea
