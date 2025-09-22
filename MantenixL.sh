@@ -5,7 +5,7 @@
 clear
 
 #VERZION
-VERSION_LOCAL="3.0.2"
+VERSION_LOCAL="3.0.3"
 
 # --- Colores ---
 VERDE='\033[0;32m'
@@ -203,10 +203,8 @@ function actualizar_script() {
     echo -e "\n${AMA}› Verificando actualizaciones para el script...${DEFAULT}"
     
     # --- LISTAS DE POSIBLES NOMBRES ---
-    # Si cambias el nombre del repo o del script, añádelo aquí en la próxima versión.
     local repos_posibles=("Debian_Maintenance" "Mantenix-Linux-Edition")
     local scripts_posibles=("MantenixL.sh" "debian_mantenimiento.sh")
-
     local url_version_encontrada=""
     local url_script_encontrado=""
     local exito=false
@@ -225,17 +223,15 @@ function actualizar_script() {
     # Bucle para encontrar la URL válida
     for repo in "${repos_posibles[@]}"; do
         local url_temp_version="https://raw.githubusercontent.com/RichyKunBv/${repo}/main/version.txt"
-        # Usamos curl para verificar si la URL existe sin descargar el contenido
         if curl --output /dev/null --silent --head --fail "$url_temp_version"; then
             url_version_encontrada="$url_temp_version"
-            # Asumimos que el nombre del script en el repo coincide con el nombre en la lista
             for script_name in "${scripts_posibles[@]}"; do
-                local url_temp_script="https://raw.githubusercontent.com/RichyKunBv/${repo}/main/${script_name}"
-                if curl --output /dev/null --silent --head --fail "$url_temp_script"; then
+                 local url_temp_script="https://raw.githubusercontent.com/RichyKunBv/${repo}/main/${script_name}"
+                 if curl --output /dev/null --silent --head --fail "$url_temp_script"; then
                     url_script_encontrado="$url_temp_script"
                     exito=true
                     break
-                fi
+                 fi
             done
         fi
         [ "$exito" = true ] && break
@@ -246,7 +242,6 @@ function actualizar_script() {
         return 1
     fi
 
-    # --- El resto de la función usa las URLs encontradas ---
     local version_remota
     version_remota=$($download_tool - "$url_version_encontrada")
     if [ -z "$version_remota" ]; then
@@ -254,7 +249,23 @@ function actualizar_script() {
         return 1
     fi
     
-    if dpkg --compare-versions "$version_remota" gt "$VERSION_LOCAL"; then
+    # --- LÓGICA DE COMPARACIÓN MEJORADA ---
+    # Detecta la familia del sistema operativo y elige el método de comparación correcto
+    local version_es_nueva=false
+    if [ "$DISTRO_FAMILIA" == "debian" ]; then
+        # Método para Debian/Ubuntu
+        if dpkg --compare-versions "$version_remota" gt "$VERSION_LOCAL"; then
+            version_es_nueva=true
+        fi
+    else
+        # Método universal para Arch, Fedora, y otros, que ordena numéricamente
+        local version_mas_alta=$(printf '%s\n' "$version_remota" "$VERSION_LOCAL" | sort -V | tail -n 1)
+        if [ "$version_mas_alta" == "$version_remota" ] && [ "$version_remota" != "$VERSION_LOCAL" ]; then
+            version_es_nueva=true
+        fi
+    fi
+
+    if [ "$version_es_nueva" = true ]; then
         echo -e "${VERDE}  ¡Nueva versión ($version_remota) encontrada! La tuya es la $VERSION_LOCAL.${DEFAULT}"
         echo -e "${AMA}  Descargando actualización...${DEFAULT}"
         
