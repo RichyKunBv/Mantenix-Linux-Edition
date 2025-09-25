@@ -5,7 +5,7 @@
 clear
 
 #VERZION
-VERSION_LOCAL="3.0.4"
+VERSION_LOCAL="3.0.5"
 
 # --- Colores ---
 VERDE='\033[0;32m'
@@ -236,11 +236,11 @@ function actualizar_script() {
     # --- LISTAS DE POSIBLES NOMBRES ---
     local repos_posibles=("Debian_Maintenance" "Mantenix-Linux-Edition")
     local scripts_posibles=("MantenixL.sh" "debian_mantenimiento.sh")
+
     local url_version_encontrada=""
     local url_script_encontrado=""
     local exito=false
     
-    # Determinar qué herramienta de descarga usar
     local download_tool=""
     if command -v curl &> /dev/null; then
         download_tool="curl -sfo"
@@ -251,7 +251,6 @@ function actualizar_script() {
         return 1
     fi
 
-    # Bucle para encontrar la URL válida
     for repo in "${repos_posibles[@]}"; do
         local url_temp_version="https://raw.githubusercontent.com/RichyKunBv/${repo}/main/version.txt"
         if curl --output /dev/null --silent --head --fail "$url_temp_version"; then
@@ -280,16 +279,13 @@ function actualizar_script() {
         return 1
     fi
     
-    # --- LÓGICA DE COMPARACIÓN MEJORADA ---
-    # Detecta la familia del sistema operativo y elige el método de comparación correcto
     local version_es_nueva=false
     if [ "$DISTRO_FAMILIA" == "debian" ]; then
-        # Método para Debian/Ubuntu
         if dpkg --compare-versions "$version_remota" gt "$VERSION_LOCAL"; then
             version_es_nueva=true
         fi
     else
-        # Método universal para Arch, Fedora, y otros, que ordena numéricamente
+
         local version_mas_alta=$(printf '%s\n' "$version_remota" "$VERSION_LOCAL" | sort -V | tail -n 1)
         if [ "$version_mas_alta" == "$version_remota" ] && [ "$version_remota" != "$VERSION_LOCAL" ]; then
             version_es_nueva=true
@@ -318,7 +314,6 @@ function actualizar_script() {
         echo -e "${VERDE}  Ya tienes la última versión ($VERSION_LOCAL). No se necesita actualizar.${DEFAULT}"
     fi
 }
-
 
 #Que haces leyendo mi codigo miamor?    U//w//U
 
