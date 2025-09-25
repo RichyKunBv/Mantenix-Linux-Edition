@@ -5,7 +5,7 @@
 clear
 
 #VERZION
-VERSION_LOCAL="3.0.3"
+VERSION_LOCAL="3.0.4"
 
 # --- Colores ---
 VERDE='\033[0;32m'
@@ -186,9 +186,40 @@ function actualizacion_profunda() {
     echo -e "${VERDE}  Actualización profunda completada.${DEFAULT}"
 }
 
+
 function XD() {
-    apt install cmatrix
-    cmatrix -b
+    echo -e "\n${MAGENTA}› Caiste xddddd ${DEFAULT}"
+    sleep 2
+    
+    case "$DISTRO_FAMILIA" in
+        debian)
+            apt-get install -y cmatrix > /dev/null 2>&1
+            ;;
+        fedora)
+            if command -v dnf &> /dev/null; then
+                dnf install -y cmatrix > /dev/null 2>&1
+            else
+                yum install -y cmatrix > /dev/null 2>&1
+            fi
+            ;;
+        arch)
+            pacman -S --noconfirm cmatrix > /dev/null 2>&1
+            ;;
+        *)
+            echo -e "${ROJO}  Papi usa algo mas comun como Arch, Fedora o Debian.${DEFAULT}"
+            return 1
+            ;;
+    esac
+
+    if command -v cmatrix &> /dev/null; then
+        echo -e "${VERDE}  ¡viruz instalado! jijiji Ejecutando...${DEFAULT}"
+        sleep 1
+        cmatrix -b
+    else
+        echo -e "${ROJO}  Error: No se pudo instalar cmatrix.${DEFAULT}"
+        echo -e "${AMA}  Pero aquí tienes un easteregg alternativo (el chiste es que salga algo):${DEFAULT}"
+        echo -e "${VERDE}01010100 01110101 00100000 01100101 01110011 01110100 11100001 01110011 00100000 01100101 01101110 00100000 01101100 01100001 00100000 01101101 01100001 01110100 01110010 01101001 01111010${DEFAULT}"
+    fi
 }
 
 function web() {
