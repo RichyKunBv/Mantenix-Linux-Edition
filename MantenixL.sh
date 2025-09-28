@@ -5,14 +5,16 @@
 clear
 
 #VERZION
-VERSION_LOCAL="3.0.5"
+VERSION_LOCAL="3.0.6"
 
 # --- Colores ---
+DEFAULT='\033[0m'
+ROJO='\033[0;31m'
 VERDE='\033[0;32m'
 AMA='\033[0;33m'
-ROJO='\033[0;31m'
+ASUL='\033[0;34m'
 MAGENTA='\033[0;35m'
-DEFAULT='\033[0m'
+CYAN='\033[0;36m'
 
 # --- Detectar distribución ---
 DISTRO=""
@@ -230,94 +232,6 @@ function web() {
     fi
 }
 
-function actualizar_script() {
-    echo -e "\n${AMA}› Verificando actualizaciones para el script...${DEFAULT}"
-    
-    # --- LISTAS DE POSIBLES NOMBRES ---
-    local repos_posibles=("Debian_Maintenance" "Mantenix-Linux-Edition")
-    local scripts_posibles=("MantenixL.sh" "debian_mantenimiento.sh")
-
-    local url_version_encontrada=""
-    local url_script_encontrado=""
-    local exito=false
-    
-    local download_tool=""
-    if command -v curl &> /dev/null; then
-        download_tool="curl -sfo"
-    elif command -v wget &> /dev/null; then
-        download_tool="wget -qO"
-    else
-        echo -e "${ROJO}  Error: Se necesita 'curl' o 'wget' para la auto-actualización.${DEFAULT}"
-        return 1
-    fi
-
-    for repo in "${repos_posibles[@]}"; do
-        local url_temp_version="https://raw.githubusercontent.com/RichyKunBv/${repo}/main/version.txt"
-        if curl --output /dev/null --silent --head --fail "$url_temp_version"; then
-            url_version_encontrada="$url_temp_version"
-            for script_name in "${scripts_posibles[@]}"; do
-                 local url_temp_script="https://raw.githubusercontent.com/RichyKunBv/${repo}/main/${script_name}"
-                 if curl --output /dev/null --silent --head --fail "$url_temp_script"; then
-                    url_script_encontrado="$url_temp_script"
-                    exito=true
-                    break
-                 fi
-            done
-        fi
-        [ "$exito" = true ] && break
-    done
-
-    if [ "$exito" = false ]; then
-        echo -e "${ROJO}  Error: No se pudo encontrar un repositorio o script válido en GitHub.${DEFAULT}"
-        return 1
-    fi
-
-    local version_remota
-    version_remota=$($download_tool - "$url_version_encontrada")
-    if [ -z "$version_remota" ]; then
-        echo -e "${ROJO}  Error: No se pudo obtener la versión remota.${DEFAULT}"
-        return 1
-    fi
-    
-    local version_es_nueva=false
-    if [ "$DISTRO_FAMILIA" == "debian" ]; then
-        if dpkg --compare-versions "$version_remota" gt "$VERSION_LOCAL"; then
-            version_es_nueva=true
-        fi
-    else
-
-        local version_mas_alta=$(printf '%s\n' "$version_remota" "$VERSION_LOCAL" | sort -V | tail -n 1)
-        if [ "$version_mas_alta" == "$version_remota" ] && [ "$version_remota" != "$VERSION_LOCAL" ]; then
-            version_es_nueva=true
-        fi
-    fi
-
-    if [ "$version_es_nueva" = true ]; then
-        echo -e "${VERDE}  ¡Nueva versión ($version_remota) encontrada! La tuya es la $VERSION_LOCAL.${DEFAULT}"
-        echo -e "${AMA}  Descargando actualización...${DEFAULT}"
-        
-        local script_actual="$0"
-        local script_nuevo="${script_actual}.new"
-        
-        if $download_tool "$script_nuevo" "$url_script_encontrado"; then
-            chmod +x "$script_nuevo"
-            mv "$script_nuevo" "$script_actual"
-            echo -e "${VERDE}  ¡Script actualizado con éxito!${DEFAULT}"
-            echo -e "${AMA}  Por favor, vuelve a ejecutar el script para usar la nueva versión.${DEFAULT}"
-            exit 0
-        else
-            echo -e "${ROJO}  Error al descargar el script actualizado.${DEFAULT}"
-            rm -f "$script_nuevo"
-            return 1
-        fi
-    else
-        echo -e "${VERDE}  Ya tienes la última versión ($VERSION_LOCAL). No se necesita actualizar.${DEFAULT}"
-    fi
-}
-
-#Que haces leyendo mi codigo miamor?    U//w//U
-
-
 # --- Funciones adicionales de mantenimiento ---
 function optimizar_sistema() {
     echo -e "\n${AMA}› Optimizando el sistema...${DEFAULT}"
@@ -369,6 +283,85 @@ function optimizar_sistema() {
     
     echo -e "${VERDE}  Optimización completada.${DEFAULT}"
 }
+
+
+function actualizar_script() {
+  echo -e "\n${AMA}› Verificando actualizaciones para el script...${DEFAULT}"
+
+  local repos_posibles=("Apptenix")
+  local scripts_posibles=("Apptenix.sh")
+
+  local url_version_encontrada=""
+  local url_script_encontrado=""
+  local exito=false
+
+  local download_tool=""
+  if command -v curl >/dev/null 2>&1; then
+    download_tool="curl -sfo"
+  elif command -v wget >/dev/null 2>&1; then
+    download_tool="wget -qO"
+  else
+    echo -e "${ROJO}  Error: Se necesita 'curl' o 'wget' para la auto-actualización.${DEFAULT}"
+    return 1
+  fi
+
+  for repo in "${repos_posibles[@]}"; do
+    local url_temp_version="https://raw.githubusercontent.com/RichyKunBv/${repo}/main/version.txt"
+    if curl --output /dev/null --silent --head --fail "$url_temp_version"; then
+      url_version_encontrada="$url_temp_version"
+      for script_name in "${scripts_posibles[@]}"; do
+        local url_temp_script="https://raw.githubusercontent.com/RichyKunBv/${repo}/main/${script_name}"
+        if curl --output /dev/null --silent --head --fail "$url_temp_script"; then
+          url_script_encontrado="$url_temp_script"
+          exito=true
+          break
+        fi
+      done
+    fi
+    [ "$exito" = true ] && break
+  done
+
+  if [ "$exito" = false ]; then
+    echo -e "${ROJO}  Error: No se pudo encontrar un repositorio o script válido en GitHub.${DEFAULT}"
+    return 1
+  fi
+
+  local version_remota
+  version_remota=$($download_tool - "$url_version_encontrada")
+  if [ -z "${version_remota}" ]; then
+    echo -e "${ROJO}  Error: No se pudo obtener la versión remota.${DEFAULT}"
+    return 1
+  fi
+
+  local version_es_nueva=false
+  if [ "$(printf '%s\n' "$version_remota" "$VERSION_LOCAL" | sort -V | tail -n 1)" == "$version_remota" ] && [ "$version_remota" != "$VERSION_LOCAL" ]; then
+    version_es_nueva=true
+  fi
+
+  if [ "$version_es_nueva" = true ]; then
+    echo -e "${VERDE}  ¡Nueva versión ($version_remota) encontrada! La tuya es la $VERSION_LOCAL.${DEFAULT}"
+    echo -e "${AMA}  Descargando actualización...${DEFAULT}"
+
+    local script_actual="$0"
+    local script_nuevo="${script_actual}.new"
+
+    if $download_tool "$script_nuevo" "$url_script_encontrado"; then
+      chmod +x "$script_nuevo"
+      mv "$script_nuevo" "$script_actual"
+      echo -e "${VERDE}  ¡Script actualizado con éxito!${DEFAULT}"
+      echo -e "${AMA}  Por favor, vuelve a ejecutar el script para usar la nueva versión.${DEFAULT}"
+      exit 0
+    else
+      echo -e "${ROJO}  Error al descargar el script actualizado.${DEFAULT}"
+      rm -f "$script_nuevo"
+      return 1
+    fi
+  else
+    echo -e "${VERDE}  Ya tienes la última versión ($VERSION_LOCAL). No se necesita actualizar.${DEFAULT}"
+  fi
+}
+
+#Que haces leyendo mi codigo miamor?    U//w//U
 
 # --- Acerca De ---
 function AD() {
