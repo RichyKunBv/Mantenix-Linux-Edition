@@ -288,8 +288,8 @@ function optimizar_sistema() {
 function actualizar_script() {
   echo -e "\n${AMA}› Verificando actualizaciones para el script...${DEFAULT}"
 
-  local repos_posibles=("Apptenix")
-  local scripts_posibles=("Apptenix.sh")
+  local repos_posibles=("Mantenix-Linux-Edition")
+  local scripts_posibles=("MantenixL.sh")
 
   local url_version_encontrada=""
   local url_script_encontrado=""
