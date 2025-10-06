@@ -1,11 +1,16 @@
 #!/bin/bash
 # Asistente de Mantenimiento para Debian, Fedora y Arch
 # Creado RichyKunBv (ustedes pueden llamarme Dios)
+# Licencia: Apache License 2.0
+
+set -o errexit
+set -o pipefail
+set -o nounset
 
 clear
 
 #VERZION
-VERSION_LOCAL="3.0.6"
+VERSION_LOCAL="3.0.7"
 
 # --- Colores ---
 DEFAULT='\033[0m'
@@ -139,14 +144,11 @@ function limpiar_sistema() {
             fi
             ;;
         arch)
-            # Limpiar caché de pacman
             pacman -Sc --noconfirm
-            
-            # Eliminar paquetes huérfanos
-            if pacman -Qtdq &> /dev/null; then
-                pacman -Rns $(pacman -Qtdq) --noconfirm
-            fi
-            ;;
+        if pacman -Qtdq &>/dev/null; then
+            pacman -Qtdq | xargs -r sudo pacman -Rns --noconfirm
+        fi
+        ;;
         *)
             echo -e "${ROJO}  Distribución no soportada para limpieza.${DEFAULT}"
             ;;
