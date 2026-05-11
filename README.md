@@ -9,7 +9,7 @@ Un script de terminal potente y amigable diseñado para simplificar el mantenimi
 ---
 
 ## ✨ Características Principales
-
+<img width="378" height="187" alt="Captura de pantalla 2026-05-11 a la(s) 4 18 35 p m" src="https://github.com/user-attachments/assets/e30e8491-c25d-4836-b6a0-47556c233e99" />
 -   🐧 **Soporte Multi-Distro¹:** Detecta automáticamente si usas una distribución basada en Debian (Ubuntu, Mint), Fedora (RHEL, CentOS) o Arch (Manjaro, EndeavourOS) y aplica los comandos correctos.
 -   🔄 **Actualización Completa²:** Actualiza los repositorios nativos (`apt`, `dnf`, `pacman`), paquetes de **Flatpak** y **Snap**, e incluso paquetes de **AUR** si tienes `yay` o `paru` instalado.
 -   🧹 **Limpieza Profunda³:** Elimina paquetes huérfanos, limpia la caché de paquetes y reduce el tamaño de los logs del sistema (`journalctl`) para liberar espacio valioso.
